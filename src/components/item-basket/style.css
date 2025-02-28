@@ -2,29 +2,32 @@
 .ItemBasket {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   transition: background-color 1s;
-  padding-left: 10px;
-}
-
-.ItemBasket-code {
-  padding: 20px 10px 20px 20px;
-}
-
-.ItemBasket-title {
-  width: 100%;
-  padding: 20px 10px;
+  padding: 16px;
 }
 
 .ItemBasket-right {
-  padding: 20px 20px 20px 10px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  flex: auto;
+  gap: 24px;
 }
 
 .ItemBasket-cell {
-  min-width: 95px;
+  min-width: 105px;
   text-align: right;
-  font-size: 18px;
   white-space: nowrap;
+}
+
+.ItemBasket-cell button {
+  background-color: var(--delete);
+  color: var(--second-text);
+
+  &:hover {
+    background-color: var(--background);
+    border-color: var(--delete);
+    color: var(--delete);
+  }
 }
