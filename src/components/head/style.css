@@ -1,9 +1,14 @@
 .Head {
-  height: 80px;
-  background: #f5f5f5;
+  color: var(--primary);
+  border-bottom: 1px solid var(--divider);
+  padding: 16px 20px;
+}
+
+.Head-container {
+  max-width: 1152px;
+  margin: 0 auto;
 }
 
 .Head h1 {
   margin: 0;
-  padding: 20px 20px 10px;
 }

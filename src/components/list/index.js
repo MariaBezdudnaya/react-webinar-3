@@ -5,13 +5,13 @@ import './style.css';
 
 function List({ list, onDeleteItem, onSelectItem }) {
   return (
-    <div className="List">
+    <ul className="List">
       {list.map(item => (
-        <div key={item.code} className="List-item">
+        <li key={item.code} className="List-item">
           <Item item={item} onDelete={onDeleteItem} onSelect={onSelectItem} />
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 

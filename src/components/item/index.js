@@ -27,7 +27,7 @@ function Item(props) {
     >
       <div className="Item-code">{props.item.code}</div>
       <div className="Item-title">
-        {props.item.title}{' '}
+        <b>{props.item.title}</b>
         {count
           ? ` | Выделяли ${count} ${plural(count, {
               one: 'раз',
