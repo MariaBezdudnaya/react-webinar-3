@@ -5,6 +5,8 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.lastGeneratedCode = initState.list ? Math.max(...initState.list.map(item => item.code), 0) : 0;
+    this.state.list = this.state.list.map(item => ({ ...item, selections: 0 })); // Инициализируем selections для каждого элемента
   }
 
   /**
@@ -29,22 +31,24 @@ class Store {
   }
 
   /**
-   * Установка состояния
-   * @param newState {Object}
-   */
+ * Установка состояния
+ * @param newState {Object}
+ */
   setState(newState) {
     this.state = newState;
     // Вызываем всех слушателей
-    for (const listener of this.listeners) listener();
+    for (const listener of this.listeners)
+    listener();
   }
 
   /**
    * Добавление новой записи
    */
   addItem() {
+    this.lastGeneratedCode++;
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.state.list.length + 1, title: 'Новая запись' }],
+      list: [...this.state.list, { code: this.lastGeneratedCode, title: 'Новая запись', selections: 0, selected: false }], // Добавляем selections при создании
     });
   }
 
@@ -63,12 +67,23 @@ class Store {
    * Выделение записи по коду
    * @param code
    */
-  selectItem(code) {
+  selectItem(code, multiSelect) {
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
-          item.selected = !item.selected;
+          const newSelected = !item.selected;
+
+          return {
+            ...item,
+            selected: newSelected, // Используем сохраненное значение
+            selections: item.selections + (newSelected ? 1 : 0), // Увеличиваем только при выделении
+          };
+        } else if (!multiSelect) {
+          return {
+            ...item,
+            selected: false, // Снимаем выделение с других элементов
+          };
         }
         return item;
       }),
