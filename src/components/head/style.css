@@ -2,6 +2,8 @@
   color: var(--primary);
   border-bottom: 1px solid var(--divider);
   padding: 16px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 }
 
 .Head-container {

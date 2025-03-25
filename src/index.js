@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { generateCode } from './utils.js';
 import App from './app.js';
 import Store from './store.js';
-import 'global.css';
+import 'theme.css';
 
 const store = new Store({
   list: [
