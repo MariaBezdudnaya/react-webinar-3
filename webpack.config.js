@@ -32,6 +32,19 @@ let config = {
           { loader: 'css-loader', options: { url: true, import: true } },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'img',
+              publicPath: 'img',
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -49,7 +62,7 @@ if (process.env.NODE_ENV === 'development') {
   config.devtool = 'inline-source-map';
   config.devServer = {
     static: path.join(__dirname, 'dist'),
-    port: 8010,
+    port: 5050,
     historyApiFallback: true,
   };
 }

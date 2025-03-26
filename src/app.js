@@ -3,6 +3,7 @@ import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
+import Modal from './components/modal';
 
 /**
  * Приложение
@@ -10,37 +11,58 @@ import PageLayout from './components/page-layout';
  * @returns {React.ReactElement}
  */
 function App({ store }) {
-  const list = store.getState().list;
+  const { list, cart, isModalOpen } = store.getState();
 
   const callbacks = {
-    onDeleteItem: useCallback(
+    onAddItemToCart: useCallback(
       code => {
-        store.deleteItem(code);
+        store.addItemToCart(code);
       },
       [store],
     ),
 
-    onSelectItem: useCallback(
+    onRemoveItemFromCart: useCallback(
       code => {
-        store.selectItem(code);
+        store.removeItemFromCart(code);
       },
       [store],
     ),
 
-    onAddItem: useCallback(() => {
-      store.addItem();
+    onOpenModal: useCallback(() => {
+      store.openModal();
+    }, [store]),
+
+    onCloseModal: useCallback(() => {
+      store.closeModal();
     }, [store]),
   };
 
+  const uniqueCartItemsCount = Object.keys(cart).length;
+  const totalPrice = list.reduce((sum, item) => {
+    return sum + (cart[item.code] || 0) * item.price; // Исправлено
+  }, 0);
+
   return (
     <PageLayout>
-      <Head title="Приложение на React" />
-      <Controls onAdd={callbacks.onAddItem} />
+      <Head title="Магазин" />
+      <Controls
+        uniqueCartItemsCount={uniqueCartItemsCount}
+        totalPrice={totalPrice}
+        onOpenModal={callbacks.onOpenModal}
+      />
       <List
         list={list}
-        onDeleteItem={callbacks.onDeleteItem}
-        onSelectItem={callbacks.onSelectItem}
+        onAddItemToCart={callbacks.onAddItemToCart}
+        cart={cart}
       />
+      {isModalOpen && (
+        <Modal
+          cart={cart}
+          list={list}
+          onRemoveItemFromCart={callbacks.onRemoveItemFromCart}
+          onCloseModal={callbacks.onCloseModal}
+        />
+      )}
     </PageLayout>
   );
 }

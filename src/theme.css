@@ -3,13 +3,13 @@
 :root {
   --background: #FFFFFF;
   --primary: #6B4ACB;
-  --primary-select: #6B4ACB1A;
   --main-text: #1A2028;
   --second-text: #FFFFFF;
   --overlay: #1A202866;
   --divider: #EFEFEF;
   --delete: #D43B3B;
   --odd-item: #6B4ACB08;
+  --card-hover: #6a4acb3d;
 
   --font-family: 'Golos Text';
   --second-font-family: 'Montserrat Alternates';

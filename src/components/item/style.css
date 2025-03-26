@@ -1,14 +1,16 @@
 .Item {
+  box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   transition: background-color 1s;
   padding: 16px;
+  box-shadow: inset 0 -1px 0 var(--divider);
 }
 
-.Item_selected {
-  background-color: var(--primary-select);
+.Item:nth-child(odd) {
+  background-color: var(--odd-item);
 }
 
 .Item-title {
@@ -21,14 +23,14 @@
 }
 
 .Item-actions button {
-  background-color: var(--delete);
+  background-color: var(--primary);
   color: var(--second-text);
   padding: 8px 16px;
 
   &:hover {
     background-color: var(--background);
-    border-color: var(--delete);
-    color: var(--delete);
+    border-color: var(--primary);
+    color: var(--primary);
   }
 }
 

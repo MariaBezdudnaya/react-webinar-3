@@ -1,12 +1,14 @@
 .Head {
   color: var(--primary);
   border-bottom: 1px solid var(--divider);
-  padding: 16px 20px;
+  padding: 16px 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
 
 .Head-container {
+  width: 80%;
+  padding-left: 16px;
   max-width: 1152px;
   margin: 0 auto;
 }
