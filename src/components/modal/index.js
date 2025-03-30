@@ -1,60 +1,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ModalLayout from '../modal-layout';
 import closeModalIcon from '../../img/cross.svg';
+import List from '../list';
 import './style.css';
 
 function Modal({ cart, list, onRemoveItemFromCart, onCloseModal }) {
-
-  const cartItems = Object.keys(cart).map(code => {
-    const item = list.find(item => item.code === Number(code));
-    return { ...item, quantity: cart[code] };
+  const cartItems = cart.map(cartItem => {
+    const itemDetails = list.find(item => item.code === cartItem.code);
+    return {
+      ...itemDetails,
+      quantity: cartItem.quantity,
+    };
   });
 
-  const totalPrice = cartItems.reduce(
+  const sumPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
+  const formattedSumPrice = sumPrice.toLocaleString('ru-RU');
 
   return (
-    <div className="Modal">
-      <div className="modal-content">
-        <button className="close-cart-btn" onClick={onCloseModal}>
-          <img src={closeModalIcon} alt="close-modal" />
-        </button>
+    <ModalLayout>
+      <div className='Modal'>
+        <div className='Modal-content'>
+          <div className='Modal-header'>
+            <button className="close-cart-btn" onClick={onCloseModal}>
+              <img src={closeModalIcon} alt="close-modal" />
+            </button>
+            <h1>Корзина</h1>
+          </div>
 
-        <h1>Корзина</h1>
+          <div className='Modal-body'>
+            {cart.length === 0 ? (
+              <p>Корзина пустая</p>
+            ) : (
+              <List
+                items={cartItems}
+                onItemClick={onRemoveItemFromCart}
+                actionName="Удалить"
+              />
+            )}
 
-        {cartItems.length === 0 ? (
-          <p className="modal-item">Корзина пуста</p>
-        ) : (
-          <div className="modal-list">
-            {cartItems.map(item => (
-              <div className="modal-item">
-                <div className="modal-title">
-                  <b>{item.title}</b>
-                </div>
-                <div className="modal-quantity">{item.quantity} шт</div>
-                <div className="modal-price">{item.price} ₽</div>
-                <div className="modal-actions">
-                  <button onClick={() => onRemoveItemFromCart(item.code)}>
-                    Удалить 
-                  </button>
-                </div>
-              </div>
-            ))}
             <div className="totalPrice">
-              <div><b>Итого:</b></div> 
-              <div><b>{totalPrice} ₽</b></div>
+              <div className="totalPrice-label"><b>Итого:</b></div>
+              <div className="totalPrice-value"><b>{formattedSumPrice} ₽</b></div>
             </div>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+    </ModalLayout>
   );
 }
 
 Modal.propTypes = {
-  cart: PropTypes.object.isRequired,
+  cart: PropTypes.arrayOf(
+    PropTypes.shape({
+      code: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired,
+    })
+  ).isRequired,
   list: PropTypes.arrayOf(
     PropTypes.shape({
       code: PropTypes.number.isRequired,
@@ -66,4 +71,4 @@ Modal.propTypes = {
   onCloseModal: PropTypes.func.isRequired,
 };
 
-export default React.memo(Modal);
+export default Modal;

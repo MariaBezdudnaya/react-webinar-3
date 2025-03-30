@@ -1,17 +1,20 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import List from './components/list';
 import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
 import Modal from './components/modal';
 
-/**
- * Приложение
- * @param store {Store} Хранилище состояния приложения
- * @returns {React.ReactElement}
- */
 function App({ store }) {
-  const { list, cart, isModalOpen } = store.getState();
+  const { list, cart, isModalOpen, totalPrice, uniqueCartItemsCount } = store.getState();
+
+  const calculateCartSummary = useCallback(() => {
+    store.calculateCartSummary();
+  }, [store]);
+
+  useEffect(() => {
+    calculateCartSummary();
+  }, [cart, calculateCartSummary]);
 
   const callbacks = {
     onAddItemToCart: useCallback(
@@ -20,27 +23,19 @@ function App({ store }) {
       },
       [store],
     ),
-
     onRemoveItemFromCart: useCallback(
       code => {
         store.removeItemFromCart(code);
       },
       [store],
     ),
-
     onOpenModal: useCallback(() => {
       store.openModal();
     }, [store]),
-
     onCloseModal: useCallback(() => {
       store.closeModal();
     }, [store]),
   };
-
-  const uniqueCartItemsCount = Object.keys(cart).length;
-  const totalPrice = list.reduce((sum, item) => {
-    return sum + (cart[item.code] || 0) * item.price; // Исправлено
-  }, 0);
 
   return (
     <PageLayout>
@@ -51,9 +46,9 @@ function App({ store }) {
         onOpenModal={callbacks.onOpenModal}
       />
       <List
-        list={list}
-        onAddItemToCart={callbacks.onAddItemToCart}
-        cart={cart}
+        items={list}
+        onItemClick={callbacks.onAddItemToCart}
+        actionName="Добавить"
       />
       {isModalOpen && (
         <Modal

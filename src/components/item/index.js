@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { formatPrice } from '../../utils';
 import './style.css';
 
-function Item({ item, onAddItemToCart }) { // Аргументы принимаются через деструктуризацию
-  const handleClick = () => {
-    onAddItemToCart(item.code);
-  };
-
+function Item({ item, onItemClick, actionName }) {
   return (
     <div className="Item">
       <div className="Item-title">
         <b>{item.title}</b>
       </div>
-      <div className="Item-price">{item.price} ₽</div>
+      
+      {item.quantity && <div className="Item-quantity">{item.quantity} шт.</div>}
+      <div className="Item-price">{formatPrice(item.price * (item.quantity || 1))}</div>
+      
       <div className="Item-actions">
-        <button onClick={handleClick} className="add-to-cart">Добавить</button>
+        <button 
+          onClick={() => onItemClick(item.code)} 
+          className={`action-button ${actionName === 'Удалить' ? 'remove-button' : 'add-button'}`}
+        >
+          {actionName}
+        </button>
       </div>
     </div>
   );
@@ -22,11 +27,15 @@ function Item({ item, onAddItemToCart }) { // Аргументы принима�
 
 Item.propTypes = {
   item: PropTypes.shape({
-    code: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    code: PropTypes.number,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    quantity: PropTypes.number,
   }).isRequired,
-  onAddItemToCart: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  actionName: PropTypes.string.isRequired,
 };
 
-export default React.memo(Item);
+export default memo(Item);
+
+

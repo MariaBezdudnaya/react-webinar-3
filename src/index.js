@@ -14,8 +14,10 @@ const store = new Store({
     { code: 6, title: 'Карандаши цветные', price: 111 },
     { code: 7, title: 'Товар сюрприз', price: 0 },
   ],
-  cart: {}, // {code: quantity}
+  cart: [],
   isModalOpen: false,
+  
+  uniqueCartItemsCount: 0,
 });
 
 const root = createRoot(document.getElementById('root'));

@@ -15,3 +15,17 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
   // Возвращаем вариант по ключу, если он есть
   return variants[key] || '';
 }
+
+
+/**
+ * Форматирование цены
+ * @param price {Number} Цена для форматирования
+ * @returns {String} Форматированная цена
+ */
+export function formatPrice(price) {
+  return new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency: 'RUB',
+    minimumFractionDigits: 0, // Убираем копейки, если цена целая
+  }).format(price);
+}

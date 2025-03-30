@@ -3,25 +3,31 @@ import PropTypes from 'prop-types';
 import Item from '../item';
 import './style.css';
 
-function List({ list, onAddItemToCart }) {
+function List({ items, onItemClick, actionName }) { // items вместо list, onItemClick вместо onAddItemToCart
   return (
     <div className="List">
-      {list.map(item => (
-        <Item key={item.code} item={item} onAddItemToCart={onAddItemToCart} />
+      {items.map(item => (
+        <Item
+          key={item.code}
+          item={item}
+          onItemClick={onItemClick} // Передаем общую функцию
+          actionName={actionName} // Передаем название действия (Добавить/Удалить)
+        />
       ))}
     </div>
   );
 }
 
 List.propTypes = {
-  list: PropTypes.arrayOf(
+  items: PropTypes.arrayOf(
     PropTypes.shape({
-      code: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
+      code: PropTypes.number,
+      title: PropTypes.string,
+      price: PropTypes.number,
     })
   ).isRequired,
-  onAddItemToCart: PropTypes.func.isRequired
+  onItemClick: PropTypes.func.isRequired,
+  actionName: PropTypes.string.isRequired, // Добавляем propType для actionName
 };
 
-export default React.memo(List);
+export default List;
