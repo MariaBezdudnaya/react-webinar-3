@@ -5,7 +5,9 @@ import { numberFormat, plural } from '../../utils';
 import Cart from '../../assets/icon/cart.svg';
 import './style.css';
 
-function BasketTool({ sum, amount, onOpen }) {
+function BasketTool(props) {
+  const { onOpen = () => {}, sum = 0, amount = 0 } = props;
+
   const cn = bem('BasketTool');
   return (
     <div className={cn()}>
@@ -29,12 +31,6 @@ BasketTool.propTypes = {
   onOpen: PropTypes.func.isRequired,
   sum: PropTypes.number,
   amount: PropTypes.number,
-};
-
-BasketTool.defaultProps = {
-  onOpen: () => {},
-  sum: 0,
-  amount: 0,
 };
 
 export default memo(BasketTool);
