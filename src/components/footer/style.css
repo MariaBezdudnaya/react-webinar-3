@@ -1,0 +1,43 @@
+.footer {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 80px;
+}
+
+.footer button, label {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  text-align: center;
+  border-radius: 2px;
+  margin: 0 2px;
+  border: none;
+  background: var(--background);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+.footer button.active {
+  background: var(--primary);
+  color: var(--second-text);
+}
+.footer button:hover {
+  background: #6B4ACB1A;
+  color: var(--main-text);
+}
+
+.footer span {
+  text-align: center;
+  color: var(--main-text);
+  margin: 0 2px;
+}
+
+.select-footer {
+  margin-left: 10px;
+  padding: 5px;
+  width: 100px;
+}

@@ -1,0 +1,37 @@
+.ItemInfo {
+  margin-bottom: 24px;
+  font-family: var(--font-family);
+  color: var(--main-text);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.ItemInfo p {
+  margin: 0 0 24px;
+}
+
+.ItemInfo-price {
+  margin-bottom: 24px;
+  font-family: var(--second-font-family);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.ItemInfo-span {
+  font-weight: 700;
+}
+
+.ItemInfo table {
+  margin-bottom: 12px;
+}
+
+.ItemInfo td {
+  height: 28px;
+  padding: 0;
+}
+
+td > div {
+  margin: 0px 8px 12px 0px;
+}

@@ -21,6 +21,14 @@
   white-space: nowrap;
 }
 
+.ItemBasket a {
+  text-decoration: none;
+}
+.ItemBasket a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
 .ItemBasket-cell button {
   background-color: var(--delete);
   color: var(--second-text);

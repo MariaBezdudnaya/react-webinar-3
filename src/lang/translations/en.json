@@ -1,0 +1,18 @@
+{
+  "title": "Shop",
+  "page": "Homepage",
+  "basket": "Basket",
+  "addToBasket": "Add",
+  "removeFromBasket": "Remove",
+  "total": "Total:",
+  "товар": "item",
+  "товара": "items",
+  "товаров": "items",
+  "emptyBasket": "empty",
+  "quantity": "pcs",  
+  "itemsOnPage": "Items On Page:",
+  "country": "Country:",
+  "category": "category:",
+  "edition": "Edition:",
+  "price": "Price: "
+}

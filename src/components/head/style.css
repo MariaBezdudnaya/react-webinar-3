@@ -12,8 +12,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1115px;
-  margin: 0 auto;
+  max-width: 1152px;
+  margin: 0 auto;  
+  display: flex;
+  justify-content: space-between;
 }
 
 .Head h1 {

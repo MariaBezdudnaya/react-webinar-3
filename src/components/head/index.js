@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
+import LanguageSwitcher from '../../lang/switcherBtn';
 import './style.css';
 
 function Head({ title }) {
@@ -7,6 +8,7 @@ function Head({ title }) {
     <div className="Head">
       <div className="Head-container">
         <h1>{title}</h1>
+        <LanguageSwitcher />
       </div>
     </div>
   );

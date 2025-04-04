@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import Item from '../item';
 import './style.css';
 
 function List({ list, renderItem }) {
+  console.log("List: props.list =", list);
   return (
     <ul className="List">
       {list.map(item => (
@@ -22,10 +22,6 @@ List.propTypes = {
     }),
   ).isRequired,
   renderItem: PropTypes.func,
-};
-
-List.defaultProps = {
-  renderItem: item => {},
 };
 
 export default memo(List);

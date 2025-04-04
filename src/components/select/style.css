@@ -1,0 +1,35 @@
+.selectContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.select {
+  appearance: none; /* Убирает стандартные стили select */
+  background: var(--background);
+  border: 1px solid var(--primary);
+  padding: 8px 24px 8px 10px;
+  font-size: 14px;
+  color: var(--main-text);
+  border-radius: 4px;
+  width: 150px;
+  cursor: pointer;
+  outline: none; /* Убираем дефолтное выделение при фокусе */
+}
+
+.select:focus {
+  border-color: var(--primary);
+}
+
+/* Стили для стрелки */
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--main-text); /* Меняем цвет стрелки */
+  pointer-events: none; /*  Чтобы стрелка не перехватывала клики */
+}
